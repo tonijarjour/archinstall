@@ -28,3 +28,4 @@ linux   /vmlinuz-linux
 initrd  /intel-ucode.img
 initrd  /initramfs-linux.img
 options root=\"LABEL=Arch Linux\" rw" > /boot/loader/entries/arch.conf
+systemctl enable dhcpcd@eno1.service
