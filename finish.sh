@@ -9,9 +9,11 @@ echo "lunar" > /etc/hostname
 echo "127.0.0.1       localhost
 ::1             localhost
 127.0.1.1       lunar.localdomain lunar" > /etc/hosts
+echo "Enter a password for root"
 passwd
 pacman -S base-devel zsh git intel-ucode
 useradd -m -g wheel -s /bin/zsh toni
+echo "Enter a password for toni"
 passwd toni
 EDITOR=vi
 visudo
