@@ -19,7 +19,7 @@ echo "+:root:LOCAL
 +:(wheel):LOCAL
 -:ALL:ALL" > /etc/security/access.conf
 bootctl --path=/boot install
-echo "default           arch
+echo "default         arch
 timeout         3
 console-mode    keep
 editor          no" > /boot/loader/loader.conf
