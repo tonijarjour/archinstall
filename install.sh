@@ -1,33 +1,5 @@
 #!/bin/sh
 
-# Easy
-SHUSERNAME='toni'
-SHHOSTNAME='sakura'
-
-# Change to nano if you're a noob.
-EDITOR='vi'
-
-# If you don't know what to put here, I'm sorry.
-SHTIMEZONE='America/New_York'
-SHLOCALE='en_US'
-CPUCODE='intel-ucode'
-GPUDRIVER='nvidia'
-NETWORKINF='eno1'
-PATHTOBOOT='boot'
-ROOTLABEL='Arch Linux'
-
-# Do NOT change unless you have a static IP Address.
-IPADDRESS='127.0.1.1'
-
-# Uncomment if you want zsh and change USERSHELL to zsh.
-GETZSHELL='zsh'
-USERSHELL='zsh'
-
-# Uncomment if you want these.
-GETGIT='git'
-GETDEVEL='base-devel'
-GETNTFS='ntfs-3g'
-
 cat > /etc/pacman.d/mirrorlist << EOF
 Server = https://arch.mirror.constant.com/\$repo/os/\$arch
 Server = http://mirror.stephen304.com/archlinux/\$repo/os/\$arch
@@ -42,46 +14,3 @@ EOF
 pacstrap /mnt base
 
 genfstab -U /mnt >> /mnt/etc/fstab
-
-echo '
-ln -sf /usr/share/zoneinfo/$SHTIMEZONE /etc/localtime
-hwclock --systohc
-echo "$SHLOCALE.UTF-8 UTF-8" > /etc/locale.gen
-locale-gen
-echo "LANG=$SHLOCALE.UTF-8" > /etc/locale.conf
-echo "$SHHOSTNAME" > /etc/hostname
-cat > /etc/hosts << EOF
-127.0.0.1       localhost
-::1             localhost
-$IPADDRESS       $SHHOSTNAME.localdomain $SHHOSTNAME
-EOF
-echo "-- Enter a password for root"
-passwd
-pacman -S $GETDEVEL $GETZSHELL $GETGIT $GETNTFS $CPUCODE $GPUDRIVER
-useradd -m -g wheel -s /bin/$USERSHELL $SHUSERNAME
-echo "-- Enter a password for $SHUSERNAME"
-passwd $SHUSERNAME
-visudo
-cat > /etc/security/access.conf << EOF
-+:root:LOCAL
-+:(wheel):LOCAL
--:ALL:ALL
-EOF
-bootctl --path=/$PATHTOBOOT install
-cat > /$PATHTOBOOT/loader/loader.conf << EOF
-default         arch
-timeout         3
-console-mode    keep
-editor          no
-EOF
-cat > /$PATHTOBOOT/loader/entries/arch.conf << EOF
-title   Arch Linux
-linux   /vmlinuz-linux
-initrd  /$CPUCODE.img
-initrd  /initramfs-linux.img
-options root="LABEL=$ROOTLABEL" rw
-EOF
-echo "/dev/sda1	/mnt/archive	ntfs-3g	uid=$SHUSERNAME,gid=wheel,umask=0022 0 0" >> /etc/fstab
-mkdir /mnt/archive
-systemctl enable dhcpcd@$NETWORKINF.service
-' | arch-chroot /mnt
