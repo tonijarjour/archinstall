@@ -43,22 +43,23 @@ pacstrap /mnt base
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
-echo "ln -sf /usr/share/zoneinfo/$SHTIMEZONE /etc/localtime
+echo '
+ln -sf /usr/share/zoneinfo/$SHTIMEZONE /etc/localtime
 hwclock --systohc
-echo \"$SHLOCALE.UTF-8 UTF-8\" > /etc/locale.gen
+echo "$SHLOCALE.UTF-8 UTF-8" > /etc/locale.gen
 locale-gen
-echo \"LANG=$SHLOCALE.UTF-8\" > /etc/locale.conf
-echo \"$SHHOSTNAME\" > /etc/hostname
+echo "LANG=$SHLOCALE.UTF-8" > /etc/locale.conf
+echo "$SHHOSTNAME" > /etc/hostname
 cat > /etc/hosts << EOF
 127.0.0.1       localhost
 ::1             localhost
 $IPADDRESS       $SHHOSTNAME.localdomain $SHHOSTNAME
 EOF
-echo \"-- Enter a password for root\"
+echo "-- Enter a password for root"
 passwd
 pacman -S $GETDEVEL $GETZSHELL $GETGIT $GETNTFS $CPUCODE $GPUDRIVER
 useradd -m -g wheel -s /bin/$USERSHELL $SHUSERNAME
-echo \"-- Enter a password for $SHUSERNAME\"
+echo "-- Enter a password for $SHUSERNAME"
 passwd $SHUSERNAME
 visudo
 cat > /etc/security/access.conf << EOF
@@ -78,8 +79,9 @@ title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /$CPUCODE.img
 initrd  /initramfs-linux.img
-options root=\"LABEL=$ROOTLABEL\" rw
+options root="LABEL=$ROOTLABEL" rw
 EOF
-echo \"/dev/sda1	/mnt/archive	ntfs-3g	uid=$SHUSERNAME,gid=wheel,umask=0022 0 0\" >> /etc/fstab
+echo "/dev/sda1	/mnt/archive	ntfs-3g	uid=$SHUSERNAME,gid=wheel,umask=0022 0 0" >> /etc/fstab
 mkdir /mnt/archive
-systemctl enable dhcpcd@$NETWORKINF.service" | arch-chroot /mnt
+systemctl enable dhcpcd@$NETWORKINF.service
+' | arch-chroot /mnt
