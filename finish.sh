@@ -26,7 +26,7 @@ echo "$HOSTNAME" > /etc/hostname
 cat > /etc/hosts << EOF
 127.0.0.1       localhost
 ::1             localhost
-$IPADDRESS       $HOSTNAME.localdomain $SHHOSTNAME
+$IPADDRESS       $HOSTNAME.localdomain $HOSTNAME
 EOF
 echo "-- Enter a password for root"
 passwd
