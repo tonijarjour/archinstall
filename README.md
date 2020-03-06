@@ -11,6 +11,7 @@ You will have to modify them to fit your system and preferences.
 Comments will break the script.
 
 -----------------
+```
 # Network interface
 ip link
 systemctl enable dhcpcd@NETWORKINF.service
@@ -121,3 +122,4 @@ mkdir /mnt/archive
 
 # Internet
 systemctl enable dhcpcd@$NETWORKINF.service
+```
