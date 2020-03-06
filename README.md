@@ -13,8 +13,9 @@ Comments will break the script.
 -----------------
 ```
 # Network interface
+NETWORKINF='eno1'
 ip link
-systemctl enable dhcpcd@NETWORKINF.service
+systemctl enable dhcpcd@$NETWORKINF.service
 
 # Verify EFI mode
 ls /sys/firmware/efi/efivars
