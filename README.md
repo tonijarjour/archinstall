@@ -12,11 +12,6 @@ Comments will break the script.
 
 -----------------
 ```
-# Network interface
-NETWORKINF='eno1'
-ip link
-systemctl enable dhcpcd@$NETWORKINF.service
-
 # Verify EFI mode
 ls /sys/firmware/efi/efivars
 
@@ -122,5 +117,6 @@ echo "/dev/sda1	/mnt/archive	ntfs-3g	uid=$USERNAME,gid=wheel,umask=0022 0 0" >> 
 mkdir /mnt/archive
 
 # Internet
+NETWORKINF='eno1'
 systemctl enable dhcpcd@$NETWORKINF.service
 ```
