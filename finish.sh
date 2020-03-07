@@ -2,7 +2,7 @@
 
 USERNAME='toni'
 HOSTNAME='sakura'
-EDITOR='vi'
+EDITOR='nvim'
 TIMEZONE='America/New_York'
 LOCALE='en_US'
 CPUCODE='intel-ucode'
@@ -29,7 +29,7 @@ pacman -S base-devel git ntfs-3g nvidia intel-ucode
 useradd -m -g wheel -s /bin/$USERSHELL $USERNAME
 echo "-- Enter a password for $USERNAME"
 passwd $USERNAME
-EDITOR=nvim visudo
+visudo
 cat > /etc/security/access.conf << EOF
 +:root:LOCAL
 +:(wheel):LOCAL
