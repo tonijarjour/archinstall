@@ -23,12 +23,8 @@ cat > /etc/hosts << EOF
 ::1             localhost
 $IPADDRESS       $HOSTNAME.localdomain $HOSTNAME
 EOF
-echo "-- Enter a password for root"
-passwd
 pacman -S base-devel git ntfs-3g nvidia intel-ucode
 useradd -m -g wheel -s /bin/$USERSHELL $USERNAME
-echo "-- Enter a password for $USERNAME"
-passwd $USERNAME
 visudo
 cat > /etc/security/access.conf << EOF
 +:root:LOCAL
@@ -52,3 +48,10 @@ EOF
 echo "/dev/sda1	/mnt/archive	ntfs-3g	uid=$USERNAME,gid=wheel,umask=0022 0 0" >> /etc/fstab
 mkdir /mnt/archive
 systemctl enable dhcpcd@$NETWORKINF.service
+echo "██████╗  ██████╗ ███╗   ██╗███████╗"
+echo "██╔══██╗██╔═══██╗████╗  ██║██╔════╝"
+echo "██║  ██║██║   ██║██╔██╗ ██║█████╗  "
+echo "██║  ██║██║   ██║██║╚██╗██║██╔══╝  "
+echo "██████╔╝╚██████╔╝██║ ╚████║███████╗"
+echo "╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚══════╝"
+echo "-- Remember to set a password for root and $USERNAME"
