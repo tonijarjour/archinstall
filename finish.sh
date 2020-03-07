@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 USERNAME='toni'
 HOSTNAME='sakura'
@@ -6,16 +6,11 @@ EDITOR='vi'
 TIMEZONE='America/New_York'
 LOCALE='en_US'
 CPUCODE='intel-ucode'
-GPUDRIVER='nvidia'
 NETWORKINF='eno1'
 PATHTOBOOT='boot'
 ROOTLABEL='Arch Linux'
 IPADDRESS='127.0.1.1'
-USERSHELL='zsh'
-GETZSHELL='zsh'
-GETGIT='git'
-GETDEVEL='base-devel'
-GETNTFS='ntfs-3g'
+USERSHELL='bash'
 
 ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime
 hwclock --systohc
@@ -30,11 +25,11 @@ $IPADDRESS       $HOSTNAME.localdomain $HOSTNAME
 EOF
 echo "-- Enter a password for root"
 passwd
-pacman -S $GETDEVEL $GETZSHELL $GETGIT $GETNTFS $CPUCODE $GPUDRIVER
+pacman -S base-devel git ntfs-3g nvidia intel-ucode
 useradd -m -g wheel -s /bin/$USERSHELL $USERNAME
 echo "-- Enter a password for $USERNAME"
 passwd $USERNAME
-visudo
+EDITOR=nvim visudo
 cat > /etc/security/access.conf << EOF
 +:root:LOCAL
 +:(wheel):LOCAL
