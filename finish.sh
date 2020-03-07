@@ -48,10 +48,5 @@ EOF
 echo "/dev/sda1	/mnt/archive	ntfs-3g	uid=$USERNAME,gid=wheel,umask=0022 0 0" >> /etc/fstab
 mkdir /mnt/archive
 systemctl enable dhcpcd@$NETWORKINF.service
-echo "██████╗  ██████╗ ███╗   ██╗███████╗"
-echo "██╔══██╗██╔═══██╗████╗  ██║██╔════╝"
-echo "██║  ██║██║   ██║██╔██╗ ██║█████╗  "
-echo "██║  ██║██║   ██║██║╚██╗██║██╔══╝  "
-echo "██████╔╝╚██████╔╝██║ ╚████║███████╗"
-echo "╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚══════╝"
+echo "-- ALL STEPS FINISHED"
 echo "-- Remember to set a password for root and $USERNAME"
