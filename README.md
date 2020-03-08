@@ -1,8 +1,8 @@
 ### How to use
 1. Filesystem.
-2. `sh install.sh`
+2. `bash install.sh`
 3. `arch-chroot /mnt`
-4. `sh finish.sh`
+4. `bash finish.sh`
 
 ### Should I use these?
 You will have to modify them to fit your system and preferences. 
