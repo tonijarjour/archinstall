@@ -23,7 +23,7 @@ cat > /etc/hosts << EOF
 ::1             localhost
 $IPADDRESS       $HOSTNAME.localdomain $HOSTNAME
 EOF
-pacman -S base-devel git ntfs-3g nvidia intel-ucode man-db man-pages
+pacman -S base-devel git ntfs-3g nvidia intel-ucode man-db man-pages neovim dhcpcd
 useradd -m -g wheel -s /bin/$USERSHELL $USERNAME
 visudo
 cat > /etc/security/access.conf << EOF

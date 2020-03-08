@@ -10,6 +10,6 @@ Server = http://ftp.osuosl.org/pub/archlinux/\$repo/os/\$arch
 Server = http://mirrors.advancedhosters.com/archlinux/\$repo/os/\$arch
 EOF
 
-pacstrap /mnt base linux linux-firmware dhcpcd neovim 
+pacstrap /mnt base linux linux-firmware
 
 genfstab -U /mnt >> /mnt/etc/fstab
