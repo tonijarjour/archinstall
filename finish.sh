@@ -55,5 +55,6 @@ Name=$NETWORKINF
 DHCP=ipv4
 EOF
 systemctl enable systemd-networkd.service
+systemctl enable systemd-resolved.service
 echo "-- ALL STEPS FINISHED"
 echo "-- Remember to set a password for root and $USERNAME"
