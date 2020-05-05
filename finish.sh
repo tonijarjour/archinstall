@@ -23,7 +23,7 @@ cat > /etc/hosts << EOF
 ::1             localhost
 $IPADDRESS       $HOSTNAME.localdomain $HOSTNAME
 EOF
-pacman -S base-devel git ntfs-3g nvidia intel-ucode man-db man-pages neovim dhcpcd
+pacman -S base-devel git ntfs-3g nvidia intel-ucode man-db man-pages neovim
 useradd -m -g wheel -s /bin/$USERSHELL $USERNAME
 visudo
 cat > /etc/security/access.conf << EOF
@@ -47,6 +47,13 @@ options root="LABEL=$ROOTLABEL" rw
 EOF
 echo "/dev/sda1	/mnt/archive	ntfs-3g	uid=$USERNAME,gid=wheel,umask=0022 0 0" >> /etc/fstab
 mkdir /mnt/archive
-systemctl enable dhcpcd@$NETWORKINF.service
+cat > /etc/systemd/network/20-wired.network << EOF
+[Match]
+Name=$NETWORKINF
+
+[Network]
+DHCP=ipv4
+EOF
+systemctl enable systemd-networkd.service
 echo "-- ALL STEPS FINISHED"
 echo "-- Remember to set a password for root and $USERNAME"
