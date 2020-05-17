@@ -39,7 +39,7 @@ console-mode    keep
 editor          no
 EOF
 cat > /$PATHTOBOOT/loader/entries/arch.conf << EOF
-title   Arch Linux
+title   $ROOTLABEL
 linux   /vmlinuz-linux
 initrd  /$CPUCODE.img
 initrd  /initramfs-linux.img
