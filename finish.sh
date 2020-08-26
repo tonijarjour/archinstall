@@ -52,7 +52,7 @@ cat > /etc/systemd/network/20-wired.network << EOF
 Name=$NETWORKINF
 
 [Network]
-DHCP=ipv4
+DHCP=yes
 EOF
 systemctl enable systemd-networkd.service
 systemctl enable systemd-resolved.service
