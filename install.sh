@@ -5,7 +5,7 @@ HOSTNAME='sakura'
 EDITOR='nvim'
 TIMEZONE='America/New_York'
 LOCALE='en_US'
-CPUCODE='intel-ucode'
+CPUCODE='intel'
 NETWORKINF='eno1'
 PATHTOBOOT='boot'
 ROOTLABEL='Arch Linux'
@@ -26,16 +26,15 @@ cat > /etc/pacman.d/mirrorlist << EOF
 Server = https://arch.mirror.square-r00t.net/\$repo/os/\$arch
 Server = https://arch.mirror.constant.com/\$repo/os/\$arch
 EOF
-####pacman -S base-devel git ntfs-3g nvidia intel-ucode man-db man-pages neovim systemd-swap reflector opendoas pkgstats
+pacman -S ntfs-3g intel-ucode man-db man-pages systemd-swap opendoas
 useradd -m -g wheel -s /bin/$USERSHELL $USERNAME
 echo "permit nopass :wheel" > /etc/doas.conf
-####visudo
 cat > /etc/security/access.conf << EOF
 +:root:LOCAL
 +:(wheel):LOCAL
 -:ALL:ALL
 EOF
-####bootctl install
+bootctl install
 cat > /$PATHTOBOOT/loader/loader.conf << EOF
 default         arch
 timeout         3
@@ -44,7 +43,7 @@ EOF
 cat > /$PATHTOBOOT/loader/entries/arch.conf << EOF
 title   $ROOTLABEL
 linux   /vmlinuz-linux
-initrd  /$CPUCODE.img
+initrd  /$CPUCODE-ucode.img
 initrd  /initramfs-linux.img
 options root="LABEL=$ROOTLABEL" rw
 EOF
