@@ -9,7 +9,6 @@ CPUCODE='intel-ucode'
 NETWORKINF='eno1'
 PATHTOBOOT='boot'
 ROOTLABEL='Arch Linux'
-IPADDRESS='127.0.1.1'
 USERSHELL='bash'
 
 ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime
@@ -21,21 +20,25 @@ echo "$HOSTNAME" > /etc/hostname
 cat > /etc/hosts << EOF
 127.0.0.1       localhost
 ::1             localhost
-$IPADDRESS       $HOSTNAME.localdomain $HOSTNAME
+127.0.1.1       $HOSTNAME.localdomain $HOSTNAME
 EOF
-pacman -S base-devel git ntfs-3g nvidia intel-ucode man-db man-pages neovim
+cat > /etc/pacman.d/mirrorlist << EOF
+Server = https://arch.mirror.square-r00t.net/\$repo/os/\$arch
+Server = https://arch.mirror.constant.com/\$repo/os/\$arch
+EOF
+####pacman -S base-devel git ntfs-3g nvidia intel-ucode man-db man-pages neovim systemd-swap reflector opendoas pkgstats
 useradd -m -g wheel -s /bin/$USERSHELL $USERNAME
-visudo
+echo "permit nopass :wheel" > /etc/doas.conf
+####visudo
 cat > /etc/security/access.conf << EOF
 +:root:LOCAL
 +:(wheel):LOCAL
 -:ALL:ALL
 EOF
-bootctl --path=/$PATHTOBOOT install
+####bootctl install
 cat > /$PATHTOBOOT/loader/loader.conf << EOF
 default         arch
 timeout         3
-console-mode    keep
 editor          no
 EOF
 cat > /$PATHTOBOOT/loader/entries/arch.conf << EOF
@@ -54,7 +57,9 @@ Name=$NETWORKINF
 [Network]
 DHCP=yes
 EOF
+echo "swapfc_enabled=1" > /etc/systemd/swap.conf
 systemctl enable systemd-networkd.service
 systemctl enable systemd-resolved.service
+systemctl enable systemd-swap
 echo "-- ALL STEPS FINISHED"
 echo "-- Remember to set a password for root and $USERNAME"

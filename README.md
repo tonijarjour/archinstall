@@ -15,7 +15,8 @@ mkdir /mnt/boot
 mount /dev/sdbA /mnt/boot
 
 # Installation
-bash install.sh
+pacstrap /mnt base linux linux-firmware
+genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
-bash finish.sh
+bash install.sh
 ```
