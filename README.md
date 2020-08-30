@@ -14,6 +14,8 @@ mount /dev/sdbB /mnt
 mkdir /mnt/boot
 mount /dev/sdbA /mnt/boot
 
+# Check /etc/pacman.d/mirrorlist
+
 # Installation
 pacstrap /mnt base linux linux-firmware
 genfstab -U /mnt >> /mnt/etc/fstab
