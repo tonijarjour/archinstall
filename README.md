@@ -7,10 +7,12 @@ fdisk /dev/sdb
 
 # Formatting
 mkfs.fat -F32 /dev/sdbA
-mkfs.ext4 -L "Arch Linux" /dev/sdbB
+mkfs.ext4 -L "Arch Linux" /dev/sdbC
+mkswap /dev/sdbB
 
 # Mounting
-mount /dev/sdbB /mnt
+swapon /dev/sdbB
+mount /dev/sdbC /mnt
 mkdir /mnt/boot
 mount /dev/sdbA /mnt/boot
 
