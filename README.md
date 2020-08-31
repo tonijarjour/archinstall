@@ -18,7 +18,10 @@ mount /dev/sdbA /mnt/boot
 
 # Installation
 pacstrap /mnt base linux linux-firmware
+
+# Mount instructions
 genfstab -U /mnt >> /mnt/etc/fstab
+
+# Chroot
 arch-chroot /mnt
-bash install.sh
 ```
