@@ -24,3 +24,5 @@ pacman -S ntfs-3g opendoas
 echo "permit nopass :wheel" > /etc/doas.conf
 useradd -m -g wheel -s /bin/$USERSHELL $USERNAME
 echo "/dev/sda1 /mnt/archive ntfs-3g uid=$USERNAME,gid=wheel,umask=0022 0 0" >> /etc/fstab
+echo "-- ALL STEPS FINISHED"
+echo "-- Remember to set a PASSWORD for $USERNAME"
