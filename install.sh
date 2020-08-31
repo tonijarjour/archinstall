@@ -18,7 +18,6 @@ cat > /etc/hosts << EOF
 ::1             localhost
 127.0.1.1       $HOSTNAME.localdomain $HOSTNAME
 EOF
-pacman -S intel-ucode
 bootctl install
 cat > /$ESPBOOT/loader/loader.conf << EOF
 default         arch
