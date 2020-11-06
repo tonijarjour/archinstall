@@ -51,5 +51,6 @@ DHCP=yes
 EOF
 systemctl enable systemd-networkd.service
 systemctl enable systemd-resolved.service
+ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 echo "-- ALL STEPS FINISHED"
 echo "-- Remember to set a PASSWORD for root and $USERNAME"
