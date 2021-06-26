@@ -39,7 +39,7 @@ title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /$CPUCODE-ucode.img
 initrd  /initramfs-linux.img
-options root="LABEL=$ROOTLABEL" rw
+options root="LABEL=$ROOTLABEL" rw quiet
 EOF
 cat > /etc/systemd/network/20-wired.network << EOF
 [Match]
