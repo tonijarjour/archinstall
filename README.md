@@ -19,7 +19,7 @@ mount /dev/sdbA /mnt/boot
 # Check /etc/pacman.d/mirrorlist
 
 # Installation
-pacstrap /mnt base linux linux-firmware intel-ucode opendoas ntfs-3g
+pacstrap /mnt base linux linux-firmware intel-ucode opendoas
 
 # Mount instructions
 genfstab -U /mnt >> /mnt/etc/fstab

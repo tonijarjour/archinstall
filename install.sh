@@ -2,12 +2,11 @@
 
 USERNAME='toni'
 HOSTNAME='sakura'
-USERSHELL='bash'
 TIMEZONE='America/New_York'
 LOCALE='en_US'
 CPUCODE='intel'
 ESPBOOT='boot'
-ROOTLABEL='Arch Linux'
+ROOTLABEL='ARCH_LINUX'
 INTERFACE='eno1'
 
 ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime
@@ -21,9 +20,9 @@ cat > /etc/hosts << EOF
 ::1             localhost
 127.0.1.1       $HOSTNAME.localdomain $HOSTNAME
 EOF
-useradd -m -g wheel -s /bin/$USERSHELL $USERNAME
+useradd -m -g wheel $USERNAME
 echo "permit nopass :wheel" > /etc/doas.conf
-echo "/dev/sda1 /mnt/archive ntfs-3g uid=$USERNAME,gid=wheel,umask=0022 0 0" >> /etc/fstab
+echo "LABEL=ARCHIVE /mnt/archive ext4 defaults 0 2" >> /etc/fstab
 cat > /etc/security/access.conf << EOF
 +:root:LOCAL
 +:(wheel):LOCAL
@@ -31,12 +30,12 @@ cat > /etc/security/access.conf << EOF
 EOF
 bootctl install
 cat > /$ESPBOOT/loader/loader.conf << EOF
-default         arch
+default         arch.conf
 timeout         3
 editor          no
 EOF
 cat > /$ESPBOOT/loader/entries/arch.conf << EOF
-title   $ROOTLABEL
+title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /$CPUCODE-ucode.img
 initrd  /initramfs-linux.img
