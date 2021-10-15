@@ -36,9 +36,9 @@ editor          no
 EOF
 cat > /$ESPBOOT/loader/entries/arch.conf << EOF
 title   Arch Linux
-linux   /vmlinuz-linux
+linux   /vmlinuz-linux-zen
 initrd  /$CPUCODE-ucode.img
-initrd  /initramfs-linux.img
+initrd  /initramfs-linux-zen.img
 options root="LABEL=$ROOTLABEL" rw quiet
 EOF
 cat > /etc/systemd/network/20-wired.network << EOF
