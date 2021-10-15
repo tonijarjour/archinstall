@@ -19,7 +19,7 @@ mount /dev/sdbA /mnt/boot
 # Check /etc/pacman.d/mirrorlist
 
 # Installation
-pacstrap /mnt base linux linux-firmware intel-ucode opendoas
+pacstrap /mnt base linux-zen linux-zen-headers linux-firmware intel-ucode opendoas
 
 # Mount instructions
 genfstab -U /mnt >> /mnt/etc/fstab
