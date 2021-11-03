@@ -1,26 +1,26 @@
-#!/bin/bash
+#!/bin/sh
 
-USERNAME='toni'
-HOSTNAME='sakura'
-TIMEZONE='America/New_York'
-LOCALE='en_US'
-CPUCODE='intel'
-ESPBOOT='boot'
-ROOTLABEL='ARCH_LINUX'
-INTERFACE='eno1'
+username='toni'
+hostname='sakura'
+timezone='America/New_York'
+locale='en_US'
+cpucode='intel'
+espboot='boot'
+rootlabel='ARCH_LINUX'
+interface='eno1'
 
-ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime
+ln -sf /usr/share/zoneinfo/$timezone /etc/localtime
 hwclock --systohc
-echo "$LOCALE.UTF-8 UTF-8" > /etc/locale.gen
+echo "$locale.UTF-8 UTF-8" > /etc/locale.gen
 locale-gen
-echo "LANG=$LOCALE.UTF-8" > /etc/locale.conf
-echo "$HOSTNAME" > /etc/hostname
+echo "LANG=$locale.UTF-8" > /etc/locale.conf
+echo "$hostname" > /etc/hostname
 cat > /etc/hosts << EOF
 127.0.0.1       localhost
 ::1             localhost
-127.0.1.1       $HOSTNAME.localdomain $HOSTNAME
+127.0.1.1       $hostname.localdomain $hostname
 EOF
-useradd -m -g wheel $USERNAME
+useradd -m -g wheel $username
 echo "permit nopass :wheel" > /etc/doas.conf
 echo "LABEL=ARCHIVE /mnt/archive ext4 defaults 0 2" >> /etc/fstab
 cat > /etc/security/access.conf << EOF
@@ -29,21 +29,21 @@ cat > /etc/security/access.conf << EOF
 -:ALL:ALL
 EOF
 bootctl install
-cat > /$ESPBOOT/loader/loader.conf << EOF
+cat > /$espboot/loader/loader.conf << EOF
 default         arch.conf
 timeout         0
 editor          no
 EOF
-cat > /$ESPBOOT/loader/entries/arch.conf << EOF
+cat > /$espboot/loader/entries/arch.conf << EOF
 title   Arch Linux
 linux   /vmlinuz-linux-zen
-initrd  /$CPUCODE-ucode.img
+initrd  /$cpucode-ucode.img
 initrd  /initramfs-linux-zen.img
-options root="LABEL=$ROOTLABEL" rw quiet
+options root="LABEL=$rootlabel" rw quiet
 EOF
 cat > /etc/systemd/network/20-wired.network << EOF
 [Match]
-Name=$INTERFACE
+Name=$interface
 
 [Network]
 DHCP=yes
@@ -51,4 +51,4 @@ EOF
 systemctl enable systemd-networkd.service
 systemctl enable systemd-resolved.service
 echo "-- ALL STEPS FINISHED"
-echo "-- Remember to set a PASSWORD for root and $USERNAME"
+echo "-- Remember to set a PASSWORD for root and $username"
