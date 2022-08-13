@@ -7,19 +7,15 @@ fdisk /dev/sdb
 
 # Formatting
 mkfs.fat -F32 /dev/sdbA
-mkfs.ext4 -L "Arch Linux" /dev/sdbC
-mkswap /dev/sdbB
+mkfs.ext4 -L "ARCH_LINUX" /dev/sdbC
 
 # Mounting
-swapon /dev/sdbB
 mount /dev/sdbC /mnt
 mkdir /mnt/boot
 mount /dev/sdbA /mnt/boot
 
-# Check /etc/pacman.d/mirrorlist
-
 # Installation
-pacstrap /mnt base linux-zen linux-firmware intel-ucode opendoas
+pacstrap /mnt base linux-zen linux-firmware amd-ucode opendoas
 
 # Mount instructions
 genfstab -U /mnt >> /mnt/etc/fstab

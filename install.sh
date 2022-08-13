@@ -4,10 +4,11 @@ username='toni'
 hostname='sakura'
 timezone='America/New_York'
 locale='en_US'
-cpucode='intel'
+cpucode='amd'
 espboot='boot'
 rootlabel='ARCH_LINUX'
-interface='eno1'
+interface='enp4s0'
+kernel='linux-zen'
 
 ln -sf /usr/share/zoneinfo/$timezone /etc/localtime
 hwclock --systohc
@@ -26,14 +27,14 @@ EOF
 bootctl install
 cat > /$espboot/loader/loader.conf << EOF
 default         arch.conf
-timeout         0
+timeout         3
 editor          no
 EOF
 cat > /$espboot/loader/entries/arch.conf << EOF
 title   Arch Linux
-linux   /vmlinuz-linux-zen
+linux   /vmlinuz-$kernel
 initrd  /$cpucode-ucode.img
-initrd  /initramfs-linux-zen.img
+initrd  /initramfs-$kernel.img
 options root="LABEL=$rootlabel" rw quiet
 EOF
 cat > /etc/systemd/network/20-wired.network << EOF
