@@ -1,4 +1,5 @@
 #!/bin/sh
+set -euo pipefail
 
 username='toni'
 hostname='sakura'
