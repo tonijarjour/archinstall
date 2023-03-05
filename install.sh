@@ -2,7 +2,7 @@
 set -euo pipefail
 
 username='toni'
-hostname='sakura'
+hostname='kumiko'
 timezone='America/New_York'
 locale='en_US'
 cpucode='amd'
@@ -21,7 +21,7 @@ useradd -m -U $username
 echo "LABEL=ARCHIVE /mnt/archive ext4 defaults 0 2" >> /etc/fstab
 cat > /etc/security/access.conf << EOF
 +:root:LOCAL
-+:($username):LOCAL
++:$username:LOCAL
 -:ALL:ALL
 EOF
 bootctl install
