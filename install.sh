@@ -17,12 +17,11 @@ echo "$locale.UTF-8 UTF-8" > /etc/locale.gen
 locale-gen
 echo "LANG=$locale.UTF-8" > /etc/locale.conf
 echo "$hostname" > /etc/hostname
-useradd -m -U -G wheel $username
-echo "permit nopass :wheel" > /etc/doas.conf
+useradd -m -U $username
 echo "LABEL=ARCHIVE /mnt/archive ext4 defaults 0 2" >> /etc/fstab
 cat > /etc/security/access.conf << EOF
 +:root:LOCAL
-+:(wheel):LOCAL
++:($username):LOCAL
 -:ALL:ALL
 EOF
 bootctl install
